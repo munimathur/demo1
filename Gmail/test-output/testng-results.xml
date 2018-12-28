@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="7320" started-at="2018-12-10T09:40:56Z" finished-at="2018-12-10T09:41:03Z">
+    <groups>
+    </groups>
+    <test name="GmailLogin" duration-ms="7320" started-at="2018-12-10T09:40:56Z" finished-at="2018-12-10T09:41:03Z">
+      <class name="com.gmail.testCases.LoginPageTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.gmail.testCases.LoginPageTest@66a3ffec]" name="setUp" is-config="true" duration-ms="11971" started-at="2018-12-10T09:40:44Z" finished-at="2018-12-10T09:40:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="initializePageObjects()[pri:0, instance:com.gmail.testCases.LoginPageTest@66a3ffec]" name="initializePageObjects" is-config="true" duration-ms="36" started-at="2018-12-10T09:40:56Z" finished-at="2018-12-10T09:40:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializePageObjects -->
+        <test-method status="PASS" signature="t01_loginPageTitleTest()[pri:1, instance:com.gmail.testCases.LoginPageTest@66a3ffec]" name="t01_loginPageTitleTest" duration-ms="41" started-at="2018-12-10T09:40:56Z" finished-at="2018-12-10T09:40:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- t01_loginPageTitleTest -->
+        <test-method status="PASS" signature="t02_loginTest()[pri:2, instance:com.gmail.testCases.LoginPageTest@66a3ffec]" name="t02_loginTest" duration-ms="6454" started-at="2018-12-10T09:40:56Z" finished-at="2018-12-10T09:41:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- t02_loginTest -->
+        <test-method status="PASS" signature="initializePageObjects()[pri:0, instance:com.gmail.testCases.LoginPageTest@66a3ffec]" name="initializePageObjects" is-config="true" duration-ms="0" started-at="2018-12-10T09:40:56Z" finished-at="2018-12-10T09:40:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializePageObjects -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.gmail.testCases.LoginPageTest@66a3ffec]" name="tearDown" is-config="true" duration-ms="769" started-at="2018-12-10T09:41:02Z" finished-at="2018-12-10T09:41:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.gmail.testCases.LoginPageTest -->
+    </test> <!-- GmailLogin -->
+  </suite> <!-- Suite -->
+</testng-results>
