@@ -1,0 +1,366 @@
+
+WebDriver Driver;
+	public itemCategory(WebDriver Ldriver) 
+	{
+		this.Driver=Ldriver;
+	}
+=======================================================================================================
+Checking Invalid 
+
+public static void main(String[] args) throws Exception {
+    String[] invalidChars = {"#", "!", "$", "@", "%", "^", "&"};
+    String name = "acbcdefghijklmnopqrstuvwxyzab";
+    d = new FirefoxDriver();
+    d.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    d.get("http://www.vrlbus.in/vrl2013/register_customer.aspx");
+    for (String invalid : invalidChars) {
+        d.findElement(By.id("FIRSTNAME")).clear();
+        d.findElement(By.id("FIRSTNAME")).sendKeys(name + invalid);
+        d.findElement(By.id("Button1")).click();
+        String alertMessage = d.switchTo().alert().getText();
+        System.out.println(invalid);
+        if (alertMessage.equals("First name Should not contain Special Characters")) {
+            System.out.println("Error displayed: First name Should not contain Special Characters");
+            d.switchTo().alert().dismiss();
+        } else {
+            System.out.println("Accepted");
+        }
+    }
+    d.findElement(By.id("FIRSTNAME")).sendKeys("acbcdefghijklmnopqrstuvwxyzabcdef");
+    d.findElement(By.id("Button1")).click();
+    String alertMessage = d.switchTo().alert().getText();
+    if (alertMessage.equals("First name Should not contain Special Characters")) {
+        System.out.println("Error displayed: First name Should not contain Special Characters");
+        d.switchTo().alert().dismiss();
+    } else {
+        System.out.println("Accepted");
+==================================================================================================================
+
+JOY
+
+@Test//(dataProvider = "ReadData")//, enabled=false)
+	public void C_change_NPassWord_Validation() throws Exception
+	{
+		Logintest ln=new Logintest();
+		String Username=Cellread(0,1,0);
+		String Password=Cellread(0,1,1);
+		ln.Login_testcase(Username,Password);
+		String[] invalidChars = {"1234567", "12345678", "aaaaaaaa",
+								"AAAAAAAA", "AAAAaaaa", "AAAAaaa1", 
+								"!@#$!@#$"};
+		ChangePasswprd CP=PageFactory.initElements(Driver, ChangePasswprd.class);
+		CP.Change_passLink();
+		Thread.sleep(2000);
+		for (String invalid : invalidChars) 
+		{	
+			CP.password(invalid);
+			CP.Change_pass();
+			String alertMessage = Driver.switchTo().alert().getText();
+			if (alertMessage.equalsIgnoreCase("Password must be at least eight (8) characters in length. Please try again.")) 
+			{
+				Driver.switchTo().alert().dismiss();
+			} 
+			else if (alertMessage.equalsIgnoreCase("Password must contain at least one (1) lowercase letter (a-z).")) 
+			{
+				Driver.switchTo().alert().dismiss();
+			} 
+			else if (alertMessage.equalsIgnoreCase("Password must contain at least one (1) number (0-9).")) 
+			{
+				Driver.switchTo().alert().dismiss();
+			} 
+			else if (alertMessage.equalsIgnoreCase("Password must contain at least one (1) special character.")) 
+			{
+				Driver.switchTo().alert().dismiss();
+			} 
+			else 
+			{
+				System.out.println(invalid+" Accepted");
+				Driver.switchTo().alert().dismiss();
+				Assert.assertTrue(false);
+				break;
+			}
+
+		}
+		
+	}
+	@Test//(dataProvider = "ReadData")//, enabled=false)
+	public void C_change_OPassWord_Validation() throws Exception
+	{
+		Logintest ln=new Logintest();
+		String Username=Cellread(0,1,0);
+		String Password=Cellread(0,1,1);
+		ln.Login_testcase(Username,Password);
+		String[] Chars = {"12345678", "Test@1234", "Test@1234"};
+		ChangePasswprd CP=PageFactory.initElements(Driver, ChangePasswprd.class);
+		CP.Change_passLink();
+		Thread.sleep(2000);
+		CP.Old_Pwd(Chars[0]);
+		CP.password(Chars[1]);
+		CP.Repassword(Chars[2]);
+		JavascriptExecutor JS=(JavascriptExecutor)Driver;
+		JS.executeScript("alert('Please enter the Capcha, This screen will hold for 20 Seconds only...')");
+		Thread.sleep(20000);
+		CP.Change_pass();
+		String alertMessage = Driver.switchTo().alert().getText();
+		if (alertMessage.equalsIgnoreCase("Please enter correct Old Password.")) 
+		{
+			Driver.switchTo().alert().dismiss();
+		} 
+		else 
+		{
+			System.out.println("Accepted");
+			Driver.switchTo().alert().dismiss();
+			Assert.assertTrue(false);
+		}
+		
+	}
+
+======================================================================================================
+
+DATE PICK
+
+List<WebElement> Daylist= Driver.findElements(assumption_Currentdate_Calender);
+		int Count= Daylist.size();
+		for (int j=0; j<Count; j++)
+		{
+			String Date= Daylist.get(j).getText();
+			if(Date.equalsIgnoreCase("1"))
+			{
+				Daylist.get(j).click();
+				break;				
+			}
+		}		
+	}
+
+===============================================================================================================================
+public void verifyClickOnGknowledge() throws Exception {
+		Assert.assertTrue(isElementPresent(By.xpath("//span[contains(text(),'Gknowledge')]")), "Gknowledge");
+		driver.findElement(By.xpath("//span[contains(text(),'Gknowledge')]")).click();
+	}
+
+
+private boolean isElementPresent(By by) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
+
+
+=====================================================================================================================
+
+List<WebElement> MenuItems= driver.findElements(By.xpath("//div[@id='topnavigationDiv']//div//button"));
+		System.out.println(MenuItems.size());
+
+
+		for (int i = 0; i < MenuItems.size(); i++) {
+			System.out.println(MenuItems.get(i).getText());
+			Assert.assertEquals(MenuItems.get(0).getText(), "Industry ", "Industry");
+		}
+
+		for (int i = 0; i < MenuItems.size(); i++) {
+			Assert.assertEquals(MenuItems.get(1).getText(), "Service Lines ", "Service Lines ");	
+		}
+		for (int i = 0; i < MenuItems.size(); i++) {
+			Assert.assertEquals(MenuItems.get(2).getText(), "Capabilities ", "Capabilities ");	
+		}
+		for (int i = 0; i < MenuItems.size(); i++) {
+			Assert.assertEquals(MenuItems.get(3).getText(), "Growth Enablement ", "Growth Enablement ");	
+		}
+		for (int i = 0; i < MenuItems.size(); i++) {
+			Assert.assertEquals(MenuItems.get(4).getText(), "Useful Links ", "Useful Links ");	
+		}
+
+========================================================================================================================
+
+String PostAQuery=driver.findElement(By.xpath("//span[contains(text(),'Post a Query')]")).getText();
+		Assert.assertEquals(PostAQuery, " Post a Query", " Post a Query");
+
+		boolean GknowledgeLogoimg=driver.findElement(By.xpath("//img[@class='logoImageClass']")).isDisplayed();
+		Assert.assertEquals(GknowledgeLogoimg, true, "GknowledgeLogoimg");
+============================================================================================================================
+
+SoftAssert sa = new SoftAssert();
+		
+		String CreatedDate=driver.findElement(By.xpath("//div[contains(text(),'Created Date')]")).getText();
+		sa.assertEquals(CreatedDate, "Created Date All", "CreatedDate");
+
+
+boolean Feedback=driver.findElement(By.xpath("//span[@class='btnTxt dispNan']")).isDisplayed();
+		sa.assertTrue(Feedback, "Feedback");
+		sa.assertAll();
+=============================================================================================================================
+
+public void verifyLogin() throws Exception {
+		Assert.assertEquals(driver.getTitle(), "GSocial");
+	}
+==============================================================================================================================
+public void verifyViewRequest() throws Exception {
+
+		//click on My Approval
+		driver.findElement(By.xpath("//span[contains(text(),'My Approvals')]")).click();
+		
+		boolean HelpMateEmpty= driver.findElement(By.xpath("//span[@class='helpmateEmpty']")).isDisplayed();
+		if(HelpMateEmpty = true) {
+			Assert.assertFalse(true , "HelpmateEmpty");
+		}
+=====================================================================================================================
+public void verifyDownloadAppointmentletter() throws Exception {
+
+		driver.findElement(By.xpath("//span[contains(text(),'My Documents')]")).click();
+
+		Boolean Appointmentletter=driver.findElement(By.xpath("//p[contains(text(),'Appointment Letter')]")).isDisplayed();
+		Assert.assertTrue(Appointmentletter, "Appointmentletter");
+		driver.findElement(By.xpath("//p[contains(text(),'Appointment Letter')]")).click();
+		
+	}
+====================================================================================================================================
+
+*** Create class of WebEventListener and implement WebDriverEventListener in Util Package
+
+ public class WebEventListener extends TestBase implements WebDriverEventListener {
+
+public  static EventFiringWebDriver e_driver;
+	public static WebEventListener eventListener;
+
+e_driver = new EventFiringWebDriver(driver);
+		// Now create object of EventListerHandler to register it with EventFiringWebDriver
+		eventListener = new WebEventListener();
+		e_driver.register(eventListener);
+		driver = e_driver;
+
+============================================================================================================================================
+
+** @FindBy(xpath="//a[contains(text(),'Accountable Officers')]")
+	@CacheLookup
+	 WebElement Accountable_Officers;
+	
+	
+	public void Accountable_Officers_Maintenance() 
+	{
+		waitForPageLoad(Driver, Accountable_Officers);
+		HighlightOnElementList(Accountable_Officers);
+		mouseClick(Accountable_Officers);
+		
+	}
+
+
+
+
+
+
+@FindBy(xpath="//input[@id='officerCode']")
+	 @CacheLookup
+	 WebElement officerCode;
+	
+	public void officer_Code(String str) 
+	{
+		waitForPageLoad(Driver,officerCode);
+		HighlightOnElement(officerCode);
+		officerCode.sendKeys(str);
+	}
+	
+	@FindBy(xpath="//input[@id='officerName']")
+	 @CacheLookup
+	 WebElement officerName;
+	
+	public void officer_Name(String str) 
+	{
+		HighlightOnElement(officerName);
+		officerName.sendKeys(str);
+	}
+
+
+
+public void responsbility_Center_Code(String str) 
+	{
+		
+		HighlightOnElement(centerCode);
+		selectDropDown(centerCode,str);
+		
+	}
+
+
+public void accountable_Save() throws Exception
+	{
+		Accountable_Officers_Maintenance();
+		officer_Code(Cellread("Accountable Officers",1,0));
+                officer_Name(Cellread("Accountable Officers",1,1));
+		official_Designation(Cellread("Accountable Officers",1,2));		
+		assumption_Date();
+		responsbility_Center_Code("12");
+		save_button();
+		acceptAlert() ;
+		acceptAlert() ;
+	}
+
++++++++++++++++++++++++++++ TEST CLASS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+public class accountableOfficersMaintenanceTest extends Baseclass
+{
+
+	@Test(description="To Verify the functionality of Save Button",priority=1)
+	public void Accountable_Officers_Save_TC_04() throws Exception 
+	{
+		//hometest store all xpath calling in test
+		homeTest.homePage();
+		//store xpath calling in test 
+		accountableOfficersMaintenance saveAccount=PageFactory.initElements(Driver, accountableOfficersMaintenance.class);
+		//calling method name
+		saveAccount.accountable_Save();
+	}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+IMPORTING FROM BASE CLASS
+
+public static void selectDropDown(WebElement element, String str)
+	{
+		Select slt=new Select(element);
+		slt.selectByVisibleText(str);
+	}
+	
+
+
+
+public String Cellread( String sheetnum, int Rownum, int Colnum) throws Exception
+	{
+		Workbook =new XSSFWorkbook(src);
+		Datasheet =Workbook.getSheet(sheetnum);			
+		XSSFRow Rowc= Datasheet.getRow(Rownum);
+		XSSFCell Col= Rowc.getCell(Colnum);
+		String Data= Col.getStringCellValue();
+		return Data;  	
+	}
+
+
+public void waitForPageLoad(WebDriver wdriver, WebElement WE) 
+	{
+	ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() 
+	{
+	       public Boolean apply(WebDriver driver) 
+	       {
+	           return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
+	       }
+	       };
+	       try {
+	           WebDriverWait wait = new WebDriverWait(wdriver, 10);
+	           wait.until(expectation);
+	           wait.until(ExpectedConditions.visibilityOfAllElements(WE));
+	       } catch (Throwable error) {
+	           Assert.fail("Timeout waiting for Page Load Request to complete.");
+	       }
+	}
+
+public void acceptAlert() 
+	{
+		WebDriverWait wait = new WebDriverWait(Driver, 3000);
+		wait.until(ExpectedConditions.alertIsPresent());
+		String alrt = Driver.switchTo().alert().getText();
+		Alert alert = Driver.switchTo().alert();
+		alert.accept();
+		Reporter.log("Error Message:" + alrt, true);
+	}
+		
