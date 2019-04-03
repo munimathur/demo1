@@ -1,0 +1,159 @@
+@FindBy(xpath="//input[@id='assumptionDate']")
+	 @CacheLookup
+	 WebElement assumptionDate;
+	
+	By assumption_Currentdate_Calender=By.xpath("//div[@id='ui-datepicker-div']//table//tr/td");
+	
+	public void assumption_Date() throws Exception 
+	{
+		HighlightOnElement(assumptionDate);
+		assumptionDate.click();
+		Thread.sleep(1000);
+		List<WebElement> Daylist= Driver.findElements(assumption_Currentdate_Calender);
+		int Count= Daylist.size();
+		for (int j=0; j<Count; j++)
+		{
+			String Date= Daylist.get(j).getText();
+			if(Date.equalsIgnoreCase("1"))
+			{
+				Daylist.get(j).click();
+				break;				
+			}
+		}		
+	}
+
+=========================================================================================================================================================
+
+By savebutton=By.xpath("//button[@title='click here to save']");
+	
+	public void save_button() 
+	{
+		WebElement save=Driver.findElement(savebutton);
+		HighlightOnElement(save);
+		save.click();
+	}
+		
+	By modify=By.xpath("//button[@title='click here to modify']");
+		
+	public void modify_Button() 
+	{
+		WebElement modifybutton=Driver.findElement(modify);
+		HighlightOnElement(modifybutton);
+		Click_Btn(modifybutton);
+	}
+	
+
+	By reset=By.xpath("//button[@title='click here to modify']//following::button[1]");
+	
+	public void reset_Button() 
+	{
+		WebElement resetbutton=Driver.findElement(reset);
+		HighlightOnElement(resetbutton);
+		resetbutton.click();
+	}
+
+========================================
+
+@FindBy(xpath="//a[contains(.,' Fresh Application')]")
+
+Assert.assertTrue(DashBoardMenu_Application.isEnabled());
+		Reporter.log("Verify Application of Citizen's Environment  DashBoardMenu_Application is present ",true);
+
+
+
+for(WebElement MenuInDashBoard:Menu_DashBoard)
+		
+		{
+			HighlightOnElement(MenuInDashBoard);
+			if(MenuInDashBoard.isDisplayed())
+			
+			{
+				String DashBoardMenu=MenuInDashBoard.getText();
+			Reporter.log("MenuInDasHboard Are:"+DashBoardMenu,true);
+			}
+		}
+		waitForSomeTime();
+	}
+
+@FindBy(xpath="//table[@style='width:100%;']/tbody/tr/td/div/h3/a[contains(.,'Environment Section')]")
+
+HighlightOnElement(Environment_Section);
+		Assert.assertTrue(Environment_Section.isEnabled());
+		Environment_Section.click();
+
+HighlightOnElement(MiddleName_Field);
+		Assert.assertEquals(true,MiddleName_Field.isEnabled());
+		excel.getExcelData(MiddleName_Field, "Environmental_Application_Form", 1, 3);
+		Reporter.log(" Verify Citizen's MiddleName_Field is Present",true); //print for eclipse console 
+
+Assert.assertEquals(true,DownloadProjectform_Button.isEnabled());
+
+Assert.assertEquals(true,DownloadReceipt.isEnabled());
+
+@FindBy(xpath="//a[contains(.,'ENVIRONMENT NOC')]/../following-sibling::div/div/div[1]/table/tbody/tr/td[5]/span")
+
+HighlightOnElement(CVV_Number);
+		Assert.assertEquals(true,CVV_Number.isEnabled());
+		excel.getExcelData(CVV_Number, "Card Details", 1, 3);
+		Reporter.log(" Verify Environment Paymant Gateway Card_Number is Present",true);
+		
+		waitForSomeTime();
+		waitForelementPresent(Expiry_Month);
+		HighlightOnElement(Expiry_Month);
+		Assert.assertEquals(true,Expiry_Month.isEnabled());
+		SelectVisibleText(Expiry_Month, "May (5)");
+		
+
+for(WebElement MenuInDashBoard:PROCEED_DELETE_BUTTONS)
+		{
+			
+			if(MenuInDashBoard.isDisplayed())
+			{
+				HighlightOnElement(MenuInDashBoard);
+				String DashBoardMenu=MenuInDashBoard.getText();
+				Reporter.log("Button in Drafted Application Are:"+DashBoardMenu,true);
+			}
+		}
+	}
+
+HighlightOnElement(ErrorMsg_Login);
+		String ActualMsg=ErrorMsg_Login.getText();
+		String ExpectedMsg="Invalid Login details";
+		Assert.assertEquals(ActualMsg, ExpectedMsg);
+		waitForSomeTime();
+		driver.close();
+
+
+@DataProvider(name="citizen")
+	public String[][] getExcelData() throws InvalidFormatException, IOException
+	{
+		return exceldata.getCellData(filepath,"Citizen Credentials");
+	}
+
+		@Test(dataProvider ="citizen",description="Verify the Home Page of Citizen",priority=1)
+		public void NRDA_ENVIRONMENT_SC_03_TC_01(String username,String password) throws InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException
+		 
+		{
+			WaterAndSewerageLoginPage logina_citizen=PageFactory.initElements(driver,WaterAndSewerageLoginPage.class);
+			logina_citizen.loginAsCitizen(username, password);
+			
+			ToverifyFunctionalityof_Environment_Loginas_Citizen login_citizen=PageFactory.initElements(driver, ToverifyFunctionalityof_Environment_Loginas_Citizen.class);
+			login_citizen.toverifyDashBoardMenu_SC_03_TC_01();
+			
+		 
+		 }
+	
+	
+		
+	@Test(dataProvider ="citizen",description="VerifytheDashBoardof ENVIRONMENT NOC",priority=2)
+	public void NRDA_ENVIRONMENT_SC_03_TC_02(String username,String password) throws InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException
+	 {
+		WaterAndSewerageLoginPage logina_citizen=PageFactory.initElements(driver,WaterAndSewerageLoginPage.class);
+		logina_citizen.loginAsCitizen(username, password);
+		
+		ToverifyFunctionalityof_Environment_Loginas_Citizen login_citizen=PageFactory.initElements(driver, ToverifyFunctionalityof_Environment_Loginas_Citizen.class);
+		login_citizen.toverifyDashBoardMenu_SC_03_TC_01();
+		login_citizen.verifytheDashBoardofEnvironmentNOC_SC_03_TC_02();
+		//login_citizen.verifytheDashBoardofEnvironmentNOC();
+	 }
+	
